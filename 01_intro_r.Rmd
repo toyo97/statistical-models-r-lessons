@@ -1,0 +1,764 @@
+---
+title: "Intro R"
+author: 
+ - Vittorio Zampinetti^[vittorio.zampinetti@polito.it]
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R and RStudio
+
+- [**R**](https://www.r-project.org/): programming language, tailored for
+statisticians
+- [**RStudio**](https://www.rstudio.com/): development environment, software for
+editing and running R (and Python) applications
+  
+  ! It's going to change name soon, see [Posit](https://posit.co/)
+  
+## Installation
+
+First install R programming language (from [here](https://cran.rstudio.com/)),
+then RStudio environment (from
+[here](https://www.rstudio.com/products/rstudio/download/#download)).
+
+## R syntax
+
+Here a brief overview of the main components of the R language.
+
+*Note: this is not a complete guide on the language nor on programming in*
+*general, but rather a quick-start introduction with the most used operations*
+*and structures, which assumes some very basic programming skills.*
+*For all the rest, Google is your friend (it really is).*
+
+### Basic operations
+
+R can be used as a fully featured calculator, typically directly
+from the console (see bottom panel in RStudio).
+
+Some examples:
+```{r}
+2 + 2 # calculator-style
+c(1, 2, 3) * 4 # vector operations
+t(matrix(c(c(1, 2, 3, 4)),
+         nrow = 2, ncol = 2)) # matrix operations (transpose) 
+```
+As any other programming language, it allows for variables declaration.
+Variables hold a value which can be assigned, modified, and used for
+other computations.
+```{r}
+a <- 2 # assign values to variables
+b = a + 2 # equal sign also valid, but...
+b
+```
+The arrow sign `<-` is the traditional sign for the assignment operation, 
+but also `=` works. Check [this examples](#arrow-sign) to see why `<-` 
+is recommended.
+
+Conditional statements and loops have straightforward syntax (similar to C/C++
+, but more compact).
+```{r}
+if (b == 4 && a > 0) { # if-else statement
+  out <- ""
+  for (i in 1:b) { # for loop
+    out <- paste(out, class(b)) # concatenate two or more strings
+  }
+  print(out) # print string to output
+} else {
+  stop("error") # stop program and exit
+}
+```
+
+## Functions
+
+Functions are called with the `()` operator and present named arguments.
+```{r}
+# get Normal samples with 0 (default) mean and 10 standard deviation
+array <- rnorm(10, sd = 10) # sd is an argument, 
+                            # the mean is left to the default 0
+array
+```
+You can explicitly call the arguments to which you want to pass the parameters
+(e.g. sd of the Gaussian). In this case it is necessary, because the second
+position argument is the mean, but we want it to be the default.
+
+### Definition
+
+To define a custom function
+
+```{r}
+# implements power operation
+#'
+#' @param x a real number
+#' @param n a natural number, defaults to 2
+#' @return n-th power of x
+pow <- function(x, n = 2) {
+  ans <- 1
+  if (n > 0) {
+    for (i in 1:n) {
+      ans <- ans * x
+    }
+  } else if (n == 0) {
+    # do nothing, ans is already set to 1
+  } else {
+    stop("error: n must be non-negative")
+  }
+  return(ans)
+}
+
+print(paste("3^5 = ", pow(3, 5),
+            ", 4^2 = ", pow(4),
+            ", 5^0 = ", pow(5, 0)))
+```
+The `return()` call can be omitted (but it's better not to).
+
+```{r, eval=FALSE}
+pow <- function(a, b) {
+  ans <- 1
+  # ...
+  # last expression is returned
+  ans # this is equivalent to write return(ans)
+}
+```
+
+
+## Data types
+
+```{r, error=TRUE}
+# [2] elementi stringhe di caratteri
+d="Ciao"
+e="Serena"
+
+# [3] elementi logici
+f=TRUE
+g=FALSE
+h=F
+i=T
+
+# possiamo chiedere a R di darci informazioni circa il "tipo" delle variabili 
+
+str(a)
+str(c)
+str(d)
+str(f)
+
+# oppure
+
+mode(a)
+mode(c)
+mode(d)
+mode(f)
+
+# possiamo passare da un tipo all'altro utilizzando le funzioni as.XXX, 
+
+l = "12"
+str(l)
+lnum = as.numeric(l)
+str(lnum)
+
+m = as.character(c)
+str(m)
+
+# la conversione deve avere senso, altrimenti R da errore
+str(d)
+as.numeric(d)
+
+
+# iniziamo a parlare di
+# oggetti VETTORI      
+# e modo degli oggetti 
+
+c(1,2,3)
+v1=c("s","e","r","e","n","a")
+v2=c(1,2,3,4)
+
+mode(v1)
+mode(v2)
+
+#alcune operazioni
+
+sort(v2)
+v2*2
+
+# cambiamo il "modo"
+
+mode(v2)="character"
+v2
+2*v2
+
+
+### quanti e quali oggetti ho salvato fino ad ora?
+
+ls()
+
+# puliamo lo spazio di lavoro:
+
+# rimuoviamo il primo vettore
+rm(v1)
+# puliamo tutta la console 
+rm(list=ls())
+
+ls()
+
+# anche se quit non è nel workspace fa parte degli
+# oggetti di modo "function" ovvero funzioni interne
+# di R (uno dei tanti oggetti inclusi automaticamente nella
+# memoria di R)
+```
+```{r, error=TRUE}
+# ora vediamo una estensione di vettore ossia le MATRICI
+# o meglio gli oggetti di **classe** "matrix"
+
+matrice1=matrix(0,nrow=6,ncol=4)
+matrice1
+mode(matrice1)
+class(matrice1)
+matrice2=matrix(1:24,nrow=6,ncol=4) # osservate che viene riempito per colonne (default)
+matrice2
+matrix(1:24,nrow=6,byrow=T)
+dim(matrice2)
+nrow(matrice2)
+ncol(matrice2)
+
+# operazioni sulle matrici
+
+# ** selezionare elementi di una matrice
+
+# elemento di coordinate (1,1)
+matrice2[1,1]
+# elementi di coordinate (1,1), (1,2) e (1,3)
+matrice2[1,1:3]
+# elementi di coordinate (1,1), (1,2), (2,1), (2,2)
+matrice2[1:2,1:2]
+# tutta la prima riga
+matrice2[1,]
+# tutta la prima colonna
+matrice2[,1]
+
+# ** la trasposta
+t(matrice2)
+
+# ** l'inversa
+solve(matrice2)  #cosa succede???
+matrice3=matrix(c(1,4,2,5),2,2)
+solve(matrice3)
+
+# ** il determinante
+det(matrice3)
+
+# ** la traccia della matrice
+diag(matrice3)
+sum(diag(matrice3))
+
+# e tante altre cose come autovalori, autovettori, simmetria, etc etc etc
+
+######
+## Operazioni di sintassi sulle matrici
+######
+
+# riprendiamo la nostra matrice2
+
+matrice2
+
+# vogliamo verificare se matrice2 contiene il numero 10
+
+matrice2==10
+any(matrice2==10)
+
+# e in quale riga/ colonna è il numero 10?
+which(matrice2==10, arr.ind=T)
+
+# e se scrivo
+which(matrice2==10)
+# come interpretiamo questa risposta?
+
+# ora proviamo a verificare se i numeri 10 e 5 sono nella matrice
+
+any(matrice2==10 | matrice2==5)
+which(matrice2==10 | matrice2==5,arr.ind=T)
+
+# vogliamo verificare se i numeri 10 e 16 sono sulla stessa riga:
+# il comando %in%
+# Spieghiamo questo nuovo comando partendo da un semplice vettore:
+
+vet=c(1,5,7,9,10)
+# voglio verificare se i numeri 1 e 9 sono presenti in questo vettore
+
+vet%in%c(1,9)
+which(vet%in%c(1,9))
+
+# ritornando alla nostra matrice cosa scriverei?
+
+matrice2%in%c(10,16)
+
+# per avere una risposta un po' piu' chiara
+mat.srotolata=matrice2%in%c(10,16)
+mat.organizzata=matrix(mat.srotolata, nrow=6,ncol=4,byrow=F)
+
+# e per vedere se sono sulla stessa riga?
+# basta sommare sulle righe e vedere se ottengo un risultato 
+# pari a 2 (ci sono 2 TRUE)
+
+sum(mat.organizzata[1,])
+sum(mat.organizzata[2,])
+sum(mat.organizzata[3,])
+sum(mat.organizzata[4,])
+sum(mat.organizzata[5,])
+sum(mat.organizzata[6,])
+
+# sulla quarta riga i 2 numeri sono presenti contemporaneamente
+
+# Se le dimensioni della mtrice sono molto elevate questa operazione è molto lunga
+
+########
+### il COMANDO "APPLY"
+########
+
+help(apply)
+
+# in altre parole
+my_function <- function() {
+  # do nothing
+}
+
+apply(X, MARGIN=1, FUN=my_function)
+
+# applica sulle RIGHE (MARGIN=1) della matrice X la my_function (FUN=mia funzione) 
+
+apply(X, MARGIN=2, FUN=my_function)
+
+# applica sulle COLONNE (MARGIN=2) della matrice X la my_function (FUN=mia funzione) 
+
+# esempio: riprendiamo la matrice2 e sommiamo tutte le righe
+apply(matrice2,1,sum)
+
+# proviamo a rispondere alla domanda precedente:
+apply(mat.organizzata,1,sum)
+which(apply(mat.organizzata,1,sum)==2) # sulla quarta riga i 2 numeri sono presenti contemporaneamente
+
+# avremmo potuto anche usare 
+rowSums(mat.organizzata)
+
+### scriviamo una funzione
+### che ci dice direttamente se 2 valori sono contenuti nella
+### stessa riga
+
+trova.vettore=function(x,y){
+out=x%in%y
+return(sum(out))
+}
+
+apply(matrice2,1,trova.vettore,y=c(10,16))
+
+
+# ma come si possono combinare dati di natura diversa in una struttura
+# simile a quella di una matrice? In fondo i dati statistici hanno
+# spesso una forma mista di tipo dato nominale/categoriale e dato numerico
+
+nome=c("Serena","Fabio","Giovanna","Alessio")
+eta=c(30,35,32,34)
+sesso=c("F","M","F","M")
+vaccino=c(T,T,F,F)
+dati=data.frame(nome,eta,sesso,vaccino)
+dati
+dim(dati)
+
+
+dati$nome
+summary(dati)
+
+
+# vediamo la differenza con la matrice
+
+mat.dati=cbind(nome,eta,sesso,vaccino)
+mat.dati
+mode(mat.dati)
+dim(mat.dati)
+str(dati)
+attributes(dati)
+str(mat.dati)
+attributes(mat.dati)
+
+
+# introduciamo gli array a 3 o pù dimensioni
+# ovvero oggetti di classe "array"
+
+array(1:24,dim=c(4,3,2))
+
+# (le matrici sono un caso particolare)
+array(1:24,dim=c(6,4))
+
+
+
+# e ora parliamo di ordinamenti
+# che dipendono dal modo degli oggetti
+# riprendiamo il nostro data set dati
+
+mode(nome)
+sort(nome)
+sort(nome,decreasing=T)
+mode(eta)
+sort(eta)
+sort(eta,decreasing=T)
+mode(vaccino)
+sort(vaccino)
+
+# differenza tra sort(...) e order(...)
+
+nome
+sort(nome)
+order(nome)
+order(sesso)
+order(sesso,eta)
+
+# order è molto utile per riordinare anche le matrici
+# o i data.frame
+
+dati[order(sesso),]
+
+# a parità di sesso, ordina rispetto all'età
+
+dati[order(sesso,eta),]
+
+
+# I factor -  accenno, li riprenderemo con l'introduzione dei modelli con variabili
+# qualitative
+
+sesso=c("F","M","F","M")
+mode(sesso)
+as.numeric(sesso)
+
+sessoF = as.factor(sesso)
+sessoF
+# i factor sembrano essere come un character, ma fate attenzione
+as.numeric(sessoF)
+
+# nel factor le lettere sono solo delle labels, ma in realtà il vettore è composto da numeri
+
+unclass(sessoF)
+
+
+# Altra differenza tra fattore e carattere
+
+sesso[1] = "IND"
+sessoF[1] = "IND"
+
+
+# list e data.frame -  contenitori generali
+# vettori e matrici gestiscono solo dati delle stesso tipi
+# list e data.frame gestiscono dati di tipi diversi e list permette anche di avere dati di
+# lunghezza diversa
+
+
+# data.frame 
+DataFrame = data.frame(X1 = runif(5,0,1), X2 = c("a","b","c","d","e"),X3 = as.factor(c("a","b","c","d","e")))
+# statistiche descrittive si possono generalmente ottenere con "summary()"
+summary(DataFrame)
+
+#list
+List = list(X1 = runif(5,0,1), X2 = c("a","b","c","d","e"),X3 = as.factor(c("a","b","c","d","e")))
+summary(List)
+str(List)
+List2 = list(X1 = runif(5,0,1), X2 = c("a","b","c","d","e"),X3 = as.factor(c("a")))
+summary(List2)
+str(List2)
+
+# Plot 
+x=seq(1,200,2)
+y=1:100
+plot(x,y)
+plot(x,y,type='l')
+lines(x/3,y)
+abline(h=2,col='red')
+abline(v=3,lty='dashed',col='blue')
+
+# campionamento i.i.d.: r, p, q, d
+?Normal
+n = 10
+x = rnorm(n,0,1)
+dnorm(x,0,1)
+y = runif(n,0,1)
+plot(x,y)
+?plot
+
+## Packages:
+# come scaricare un pacchetto (serve avere una connessione attiva)
+# install.packages("nomepacchetto")
+# es:install.packages("ggplot2")
+# come caricare un pacchetto già scaricato
+#library("nomepacchetto")
+```
+
+### Base types
+
+There are 5 basic data types:
+- **numeric** (real numbers)
+- **integer**
+- **logical** (aka boolean)
+- **character**
+- **complex** (complex numbers)
+
+#### Numeric
+When you write numbers in R, they are going to
+default to numeric type values
+
+```{r}
+a <- 3.4 # decimal
+b <- -.30 # signed decimal
+c <- 42 # also without dot, it's numeric
+
+print(paste0("data types | a:", class(a),
+            ", b:", class(b),
+            ", c:", class(c)))
+
+```
+#### Integer
+
+Integer numbers can be enforced typing an `L` next to the digits.
+Casting is implicit when the result of an operation involving integers
+is not an integer
+
+```{r}
+int_num <- 50L # 50 stored as integer
+
+non_casted_num <- int_num - 2L # result is exactly 48, still int
+casted_num <- int_num / 7L # implicit cast to numeric type to store decimals
+print(paste(class(int_num), class(non_casted_num), class(casted_num), sep = ", "))
+```
+
+#### Logical
+
+The `logical` type can only hold `TRUE` or `FALSE` (in capital letters)
+```{r}
+bool_a <- FALSE
+bool_b <- T # T and F are short for TRUE and FALSE
+bool_a == !bool_b # if 'A' is not equal to 'not B', raise an error
+```
+You can test the value of a boolean also using `0,1`
+```{r}
+bool_a == 0 # if 'A' is not equal to 'not B', raise an error
+```
+and a sum between logical values, treats `FALSE = 0` and `TRUE = 1`,
+which is useful when counting true values in logical arrays
+```{r}
+bool_a + bool_b + bool_b # FALSE + TRUE + TRUE (it's not an OR operation)
+```
+#### Character
+
+A character is any number of characters enclosed in quotes `' '` or double
+quotes `" "`.
+```{r}
+char_a <- "," # single character
+char_b <- "bird" # string
+char_c <- 'word' # single quotes
+full_char <- paste(char_b, char_a, char_c) # concatenate chars
+class(full_char) # still a character
+```
+
+#### Complex
+
+```{r}
+complex_num <- 5 + 4i
+Mod(complex_num) # try all complex operations, e.g. modulus
+```
+
+#### Special values
+
+- `NA`: "not available", missing value
+- `Inf`: infinity
+- `NaN`: "not-a-number", undefined value
+
+```{r}
+missing_val <- NA
+is.na(missing_val) # test if value is missing
+```
+
+Every operation involving missing values, will output `NA`
+```{r}
+missing_val == NA # cannot use ==
+```
+
+```{r}
+print(paste(
+  "1/0 = ", 1/0,
+  ", 0/0 = ", 0/0
+))
+```
+
+#### Conversion
+
+Variables types can be converted with `as.<typename>()`-like functions, as long
+as conversion makes sense. Some examples:
+
+```{r}
+v <- T
+w <- "0"
+x <- 3.2
+y <- 2L
+z <- "F"
+cat(paste( 
+  paste(x, as.integer(x), sep = " => "), # from numeric to integer
+  paste(y, as.numeric(y), sep = " => "), # from integer to numeric
+  paste(y, as.character(y), sep = " => "),  # from integer to character
+  paste(w, as.numeric(w), sep = " => "),  # from number-char to numeric
+  paste(v, as.numeric(v), sep = " => "), # from logical to numeric
+  sep = "\n"
+))
+```
+
+```{r, error=TRUE}
+as.numeric(z)  # from character to numeric (coercion warning - NA)
+```
+
+### Vectors and matrices
+
+```{r}
+x_range <- 1:10
+class(x_range)
+```
+
+```{r}
+
+
+y <- 1:10
+class(y)
+```
+### Lists and dataframes
+
+## Plotting
+
+## Sampling
+
+## Extras
+
+### File system and helper
+
+R language provides several tools for management of files and function help.
+
+```{r}
+# quali sono gli oggetti memorizzati nella console?
+
+ls()
+
+# dove stiamo lavorando? Ossia in quale directory di lavoro (working directory) stiamo memorizzando i nostri dati?
+
+getwd()
+
+
+# proviamo a cambiare la directory di lavoro
+# setwd("C:/Users/marti/OneDrive/Desktop/modelli_statistici/")
+getwd()
+
+# tutto cio' che salveremo da adesso in poi, verrà memorizzato in questa directory di lavoro.
+
+# salviamo l'intero workspace dando un nome nostro file
+
+# save.image("Lez1.RData")
+
+# e vediamo che files sono stati salvati nella nostra directory di lavoro
+
+dir(all.files=TRUE)
+#oppure
+list.files()
+
+### Uscire: 2 diverse possibilità
+### 1) chiudiamo dalla crocetta rossa: Salva area di lavoro? SI NO
+### 2) digitiamo q()
+### 1) e 2) salvano i seguenti oggetti:
+###### File .RData : contiene il risultato di ciò che abbiamo eseguito 
+###### File .Rhistory: i comandi eseguiti (script)
+
+
+
+# Ripartiamo dalla sessione precedente andando a pescare
+# il file .RData dalla directory opportuna oppure       
+# reimpartendo tutti i comandi precedenti memorizzati   
+# nel file .Rhistory                                    
+
+#######
+##### Come orientarsi e chiedere aiuto ad R?
+#######
+
+help.start() # Browser
+
+#Per quanto riguarda la documentazione sulla sintassi di specifici comandi ed i
+#relativi argomenti opzionali sono utili i comandi in linea
+# help()
+# help.search()
+
+help(quit)
+#oppure
+?quit
+
+# Quante altre operazioni numeriche e con quale sintassi?
+?Arithmetic
+help(Arithmetic)
+help(Trig)
+help(Special)
+ 
+# Una volta ripresa la sessione in "R console"
+# vediamo cosa altro puo' fare l'ambiente R    
+```
+Most of these commands are also available throught RStudio graphical interface
+
+
+### Arrow sign
+
+The difference between `<-` and `=` is not just programming *style* preference.
+Here an example where using `=` rather than `<-` makes a difference:
+
+```{r, error=TRUE}
+# gives error: argument 'b' is not part of 'within'
+within(data.frame(a= rnorm(2)), b = a^2) 
+# 'b<-a^2' is the value passed to the expr argument of within()
+within(data.frame(a = rnorm(2)), b <- a^2) 
+```
+Although this event might never occur in one's programming experience, it's
+safer (and more elegant) to use `<-` when assigning variable.
+
+Besides, `->` is also valid and it is used (more intuitive) when assigning pipes
+result to variables.
+
+```{r,message=FALSE}
+library(dplyr)
+
+starwars %>%
+  dplyr::mutate(bmi = mass / ((height / 100) ^ 2)) %>%
+  dplyr::filter(!is.na(bmi)) %>%
+  dplyr::group_by(species) %>%
+  dplyr::summarise(bmi = mean(bmi)) %>%
+  dplyr::arrange(desc(bmi)) -> x
+
+x
+```
+
+## Exercises
+
+1. LogSumExp trick
+
+```{r}
+log_sum_exp2 <- function(a, b) {
+  max_el <- max(a, b)
+  sum_exp <- sum(c(exp(a - max_el), exp(b - max_el)))
+  return(log( sum_exp ) + max_el)
+}
+log_sum_exp2(a = -1000, b = -1001)
+# see log-sum-exp trick:
+# https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations
+```
+
+While `<-` is only used for variable assignment, i.e. filling up the variable
+allocated space with some value, the `=` is both used for assignment and
+function argument passing (as introduced in [Functions](#functions))
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
