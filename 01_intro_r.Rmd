@@ -1,14 +1,17 @@
 ---
 title: "Intro R"
-author: 
- - Vittorio Zampinetti^[vittorio.zampinetti@polito.it]
+author: "Vittorio Zampinetti^[vittorio.zampinetti@polito.it]"
 date: "`r Sys.Date()`"
-output: html_document
+output: bookdown::gitbook
+documentclass: book
+github-repo: toyo97/statistical-models-r
+description: "R tutorial based on Modelli Statistici course at PoliTo"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# Introduction
 
 ## R and RStudio
 
@@ -515,13 +518,4 @@ log_sum_exp2(a = -1000, b = -1001)
 
 While `<-` is only used for variable assignment, i.e. filling up the variable
 allocated space with some value, the `=` is both used for assignment and
-function argument passing (as introduced in [Functions](#functions))
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+function argument passing (as introduced in [Functions](#functions)).
