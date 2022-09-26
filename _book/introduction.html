@@ -156,13 +156,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5" data-path="01_intro_r.html"><a href="#data-manipulation"><i class="fa fa-check"></i><b>1.5</b> Data manipulation</a></li>
 <li class="chapter" data-level="1.6" data-path="01_intro_r.html"><a href="#plotting"><i class="fa fa-check"></i><b>1.6</b> Plotting</a></li>
 <li class="chapter" data-level="1.7" data-path="01_intro_r.html"><a href="#examples-plot-and-data-manipulation"><i class="fa fa-check"></i><b>1.7</b> Examples: plot and data manipulation</a></li>
-<li class="chapter" data-level="1.8" data-path="01_intro_r.html"><a href="#extras"><i class="fa fa-check"></i><b>1.8</b> Extras</a>
+<li class="chapter" data-level="1.8" data-path="01_intro_r.html"><a href="#probability"><i class="fa fa-check"></i><b>1.8</b> Probability</a></li>
+<li class="chapter" data-level="1.9" data-path="01_intro_r.html"><a href="#extras"><i class="fa fa-check"></i><b>1.9</b> Extras</a>
 <ul>
-<li class="chapter" data-level="1.8.1" data-path="01_intro_r.html"><a href="#file-system-and-helper"><i class="fa fa-check"></i><b>1.8.1</b> File system and helper</a></li>
-<li class="chapter" data-level="1.8.2" data-path="01_intro_r.html"><a href="#packages"><i class="fa fa-check"></i><b>1.8.2</b> Packages</a></li>
-<li class="chapter" data-level="1.8.3" data-path="01_intro_r.html"><a href="#arrow-sign"><i class="fa fa-check"></i><b>1.8.3</b> Arrow sign</a></li>
+<li class="chapter" data-level="1.9.1" data-path="01_intro_r.html"><a href="#file-system-and-helper"><i class="fa fa-check"></i><b>1.9.1</b> File system and helper</a></li>
+<li class="chapter" data-level="1.9.2" data-path="01_intro_r.html"><a href="#packages"><i class="fa fa-check"></i><b>1.9.2</b> Packages</a></li>
+<li class="chapter" data-level="1.9.3" data-path="01_intro_r.html"><a href="#arrow-sign"><i class="fa fa-check"></i><b>1.9.3</b> Arrow sign</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path="01_intro_r.html"><a href="#exercises"><i class="fa fa-check"></i><b>1.9</b> Exercises</a></li>
+<li class="chapter" data-level="1.10" data-path="01_intro_r.html"><a href="#exercises"><i class="fa fa-check"></i><b>1.10</b> Exercises</a></li>
 </ul></li>
 </ul>
 
@@ -195,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 statisticians</p></li>
 <li><p><a href="https://www.rstudio.com/"><strong>RStudio</strong></a>: development environment, software for
 editing and running R (and Python) applications</p>
-<p>! It’s going to change name soon, see <a href="https://posit.co/">Posit</a></p></li>
+<p>It’s going to change name soon, see <a href="https://posit.co/">Posit</a></p></li>
 </ul>
 <div id="installation" class="section level3 hasAnchor" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Installation<a href="#installation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -259,8 +260,8 @@ function argument passing (as introduced in <a href="#functions">Functions</a>).
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>array <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">10</span>) <span class="co"># sd is an argument, </span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># the mean is left to the default 0</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>array</span></code></pre></div>
-<pre><code>##  [1] 12.951038  9.589734  3.102886 19.614036  5.565497 14.463727 11.735542
-##  [8] 19.117974  4.253846  7.633100</code></pre>
+<pre><code>##  [1]  12.319380  -2.748488   8.717233  -6.848475 -14.291883  -6.657789
+##  [7]   4.245089  18.076293   4.119013 -13.961255</code></pre>
 <p>You can explicitly call the arguments to which you want to pass the parameters
 (e.g. sd of the Gaussian). In this case it is necessary, because the second
 position argument is the mean, but we want it to be the default.</p>
@@ -304,12 +305,14 @@ position argument is the mean, but we want it to be the default.</p>
 <p>Every variable in R is an object, which holds a value (or collection of values) and some other attributes, properties or methods.</p>
 <div id="base-types" class="section level3 hasAnchor" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Base types<a href="#base-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are 5 basic data types:
-- <strong>numeric</strong> (real numbers)
-- <strong>integer</strong>
-- <strong>logical</strong> (aka boolean)
-- <strong>character</strong>
-- <strong>complex</strong> (complex numbers)</p>
+<p>There are 5 basic data types:</p>
+<ul>
+<li><strong>numeric</strong> (real numbers)</li>
+<li><strong>integer</strong></li>
+<li><strong>logical</strong> (aka boolean)</li>
+<li><strong>character</strong></li>
+<li><strong>complex</strong> (complex numbers)</li>
+</ul>
 <div id="numeric" class="section level4 hasAnchor" number="1.4.1.1">
 <h4><span class="header-section-number">1.4.1.1</span> Numeric<a href="#numeric" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>When you write numbers in R, they are going to
@@ -340,8 +343,8 @@ is not an integer</p>
 <p>The <code>logical</code> type can only hold <code>TRUE</code> or <code>FALSE</code> (in capital letters)</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bool_a <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bool_b <span class="ot">&lt;-</span> T <span class="co"># T and F are short for TRUE and FALSE</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>bool_a <span class="sc">==</span> <span class="sc">!</span>bool_b <span class="co"># if &#39;A&#39; is not equal to &#39;not B&#39;, raise an error</span></span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>bool_a <span class="sc">|</span> <span class="sc">!</span>bool_b <span class="co"># logical or between F and not-T</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
 <p>You can test the value of a boolean also using <code>0,1</code></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bool_a <span class="sc">==</span> <span class="dv">0</span> <span class="co"># if &#39;A&#39; is not equal to &#39;not B&#39;, raise an error</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -611,26 +614,26 @@ most of the dataset will be stored in dataframes.</p>
 <span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="co"># x was set to just one value and gets repeated (&#39;recycled&#39;)</span></span></code></pre></div>
 <pre><code>##    x  y char
 ## 1  1  1    b
-## 2  1  2    a
-## 3  1  3    b
-## 4  1  4    b
-## 5  1  5    b
-## 6  1  6    a
-## 7  1  7    a
+## 2  1  2    b
+## 3  1  3    a
+## 4  1  4    a
+## 5  1  5    a
+## 6  1  6    b
+## 7  1  7    b
 ## 8  1  8    a
-## 9  1  9    a
+## 9  1  9    b
 ## 10 1 10    a</code></pre>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>df1[[<span class="dv">2</span>]] <span class="co"># access through column index</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>df1<span class="sc">$</span>x <span class="co"># access through column name</span></span></code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>df1[, <span class="dv">3</span>] <span class="co"># access with matrix-style index</span></span></code></pre></div>
-<pre><code>##  [1] &quot;b&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot;</code></pre>
+<pre><code>##  [1] &quot;b&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;a&quot; &quot;b&quot; &quot;a&quot;</code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>df1[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ] <span class="co"># can also select subset of rows</span></span></code></pre></div>
 <pre><code>##   x y char
-## 2 1 2    a
-## 3 1 3    b
-## 4 1 4    b</code></pre>
+## 2 1 2    b
+## 3 1 3    a
+## 4 1 4    a</code></pre>
 <p>The <code>dplyr</code> library provides another dataframe object (called <em>tibble</em>) which has all
 the effective features of Base R <code>data.frame</code> and none of the
 deprecated functionalities. It’s simply a newer version of dataframes (therefore
@@ -667,9 +670,9 @@ with <code>as.data.frame()</code> you will get a Base R dataframe.</p>
 we can focus on data manipulation.</p>
 <p>The <code>dplyr</code> library provides an intuitive way of working with datasets.
 For instance, let’s consider the <code>mtcars</code> dataset.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>modelname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(mtcars)</span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mtcars)</span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>mtcars</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>modelname <span class="ot">&lt;-</span> <span class="fu">rownames</span>(mtcars) <span class="co"># name column with models</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(mtcars) <span class="co"># convert to tibble</span></span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="co"># display the raw data</span></span></code></pre></div>
 <pre><code>## # A tibble: 32 × 12
 ##      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb modelname  
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      
@@ -729,12 +732,11 @@ Data is in form of dataframes and the columns are selected in the aesthetics
 arguments.</p>
 <p>The same plot shown before can be drawn with ggplot in the following way.</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>gg_df <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span></code></pre></div>
-<pre><code>## Warning: `data_frame()` was deprecated in tibble 1.1.0.
-## Please use `tibble()` instead.</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_df) <span class="sc">+</span></span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">3</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>gg_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_df) <span class="sc">+</span></span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">3</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>This is just a brief example. More will be seen in the next lessons.
 Check out this
@@ -745,9 +747,9 @@ for quick look-up on ggplot functions.</p>
 <h2><span class="header-section-number">1.7</span> Examples: plot and data manipulation<a href="#examples-plot-and-data-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Combining altogether, here a data visualization workflow on the
 <a href="https://www.gapminder.org/data/">Gapminder</a> dataset.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="co"># have a quick look at the Gapminder dataset</span></span>
-<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gapminder)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="co"># have a quick look at the Gapminder dataset</span></span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gapminder)</span></code></pre></div>
 <pre><code>## tibble [1,704 × 6] (S3: tbl_df/tbl/data.frame)
 ##  $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
@@ -762,65 +764,68 @@ values from the set <code>{Africa, Americas, Asia, Europe, Oceania}</code>).</p>
 <p>Let’s say we want to compare the GDP per capita of some
 different countries (Italy, Japan, Brasil and Ethiopia),
 plotted against time (year by year).</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform the dataset according to what is necessary</span></span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>wanted_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Ethiopia&quot;</span>)</span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries) <span class="sc">%&gt;%</span></span>
-<span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># now feed the filtered data to ggplot (using the pipe op)</span></span>
-<span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(year, gdpPercap, <span class="at">color =</span> country))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" />
-If we want to add some information about the same measure over the whole
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform the dataset according to what is necessary</span></span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>wanted_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Italy&quot;</span>, <span class="st">&quot;Japan&quot;</span>, <span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Ethiopia&quot;</span>)</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries) <span class="sc">%&gt;%</span></span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># now feed the filtered data to ggplot (using the pipe op)</span></span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(year, gdpPercap, <span class="at">color =</span> country))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>If we want to add some information about the same measure over the whole
 continent, showing for instance the boundaries of GDP among all countries
-in the same continent of the four selected countries.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># give all the data to ggplot, we&#39;ll filter later</span></span>
-<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> </span>
-<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
-<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(year, gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
-<span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># now group by continent and get the upper/lower bounds</span></span>
-<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span></span>
-<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gdpPercap)) <span class="sc">%&gt;%</span> <span class="co"># min(NA) = NA, make sure NAs are excluded</span></span>
-<span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span> <span class="co"># gather all entries for each continent separately</span></span>
-<span id="cb134-11"><a href="#cb134-11" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">minGdp =</span> <span class="fu">min</span>(gdpPercap), <span class="at">maxGdp =</span> <span class="fu">max</span>(gdpPercap), <span class="fu">across</span>()) <span class="sc">%&gt;%</span> <span class="co"># compute aggregated quantity (min/max)</span></span>
-<span id="cb134-12"><a href="#cb134-12" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
-<span id="cb134-13"><a href="#cb134-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> minGdp, <span class="at">ymax =</span> maxGdp,</span>
-<span id="cb134-14"><a href="#cb134-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> year, <span class="at">color =</span> country, <span class="at">fill =</span> country),</span>
-<span id="cb134-15"><a href="#cb134-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="ot">-&gt;</span> plt</span>
-<span id="cb134-16"><a href="#cb134-16" aria-hidden="true" tabindex="-1"></a>plt</span></code></pre></div>
+in the same continent of the four selected countries, this
+is more or less what we can do</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># give all the data to ggplot, we&#39;ll filter later</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> </span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(year, gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
+<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># now group by continent and get the upper/lower bounds</span></span>
+<span id="cb132-8"><a href="#cb132-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span></span>
+<span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gdpPercap)) <span class="sc">%&gt;%</span> <span class="co"># min(NA) = NA, make sure NAs are excluded</span></span>
+<span id="cb132-10"><a href="#cb132-10" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span> <span class="co"># gather all entries for each continent separately</span></span>
+<span id="cb132-11"><a href="#cb132-11" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">minGdp =</span> <span class="fu">min</span>(gdpPercap), <span class="at">maxGdp =</span> <span class="fu">max</span>(gdpPercap), <span class="fu">across</span>()) <span class="sc">%&gt;%</span> <span class="co"># compute aggregated quantity (min/max)</span></span>
+<span id="cb132-12"><a href="#cb132-12" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
+<span id="cb132-13"><a href="#cb132-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> minGdp, <span class="at">ymax =</span> maxGdp,</span>
+<span id="cb132-14"><a href="#cb132-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> year, <span class="at">color =</span> country, <span class="at">fill =</span> country),</span>
+<span id="cb132-15"><a href="#cb132-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="ot">-&gt;</span> plt</span>
+<span id="cb132-16"><a href="#cb132-16" aria-hidden="true" tabindex="-1"></a>plt</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;continent&#39;, &#39;year&#39;. You can override using
 ## the `.groups` argument.</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-43-1.png" width="672" />
 But, since it looks a bit confusing, we might want four separate plots.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries) <span class="sc">%&gt;%</span></span>
-<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(continent) <span class="sc">%&gt;%</span> <span class="co"># extract one column from a dataframe (different from select)</span></span>
-<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="ot">-&gt;</span> wanted_continents</span>
-<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(continent <span class="sc">%in%</span> wanted_continents) <span class="sc">%&gt;%</span></span>
-<span id="cb136-8"><a href="#cb136-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb136-9"><a href="#cb136-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> </span>
-<span id="cb136-10"><a href="#cb136-10" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
-<span id="cb136-11"><a href="#cb136-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(year, gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
-<span id="cb136-12"><a href="#cb136-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># now group by continent and get the upper/lower bounds</span></span>
-<span id="cb136-13"><a href="#cb136-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span></span>
-<span id="cb136-14"><a href="#cb136-14" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gdpPercap)) <span class="sc">%&gt;%</span> <span class="co"># min(NA) = NA, make sure NAs are excluded</span></span>
-<span id="cb136-15"><a href="#cb136-15" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span> <span class="co"># gather all entries for each continent separately</span></span>
-<span id="cb136-16"><a href="#cb136-16" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">minGdp =</span> <span class="fu">min</span>(gdpPercap), <span class="at">maxGdp =</span> <span class="fu">max</span>(gdpPercap), <span class="fu">across</span>()) <span class="sc">%&gt;%</span> <span class="co"># compute aggregated quantity (min/max)</span></span>
-<span id="cb136-17"><a href="#cb136-17" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
-<span id="cb136-18"><a href="#cb136-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> minGdp, <span class="at">ymax =</span> maxGdp,</span>
-<span id="cb136-19"><a href="#cb136-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> year, <span class="at">color =</span> country, <span class="at">fill =</span> country),</span>
-<span id="cb136-20"><a href="#cb136-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb136-21"><a href="#cb136-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(continent)) <span class="sc">+</span></span>
-<span id="cb136-22"><a href="#cb136-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Country GDP per capita compared with&quot;</span>,</span>
-<span id="cb136-23"><a href="#cb136-23" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;continent lower and upper bounds&quot;</span>),</span>
-<span id="cb136-24"><a href="#cb136-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;GDP per capita (PPP dollars)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries) <span class="sc">%&gt;%</span></span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>(continent) <span class="sc">%&gt;%</span> <span class="co"># extract one column from a dataframe (different from select)</span></span>
+<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="ot">-&gt;</span> wanted_continents</span>
+<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">%&gt;%</span></span>
+<span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(continent <span class="sc">%in%</span> wanted_continents) <span class="sc">%&gt;%</span></span>
+<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> </span>
+<span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
+<span id="cb134-11"><a href="#cb134-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(year, gdpPercap, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
+<span id="cb134-12"><a href="#cb134-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># now group by continent and get the upper/lower bounds</span></span>
+<span id="cb134-13"><a href="#cb134-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span></span>
+<span id="cb134-14"><a href="#cb134-14" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gdpPercap)) <span class="sc">%&gt;%</span> <span class="co"># min(NA) = NA, make sure NAs are excluded</span></span>
+<span id="cb134-15"><a href="#cb134-15" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span> <span class="co"># gather all entries for each continent separately</span></span>
+<span id="cb134-16"><a href="#cb134-16" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">minGdp =</span> <span class="fu">min</span>(gdpPercap), <span class="at">maxGdp =</span> <span class="fu">max</span>(gdpPercap), <span class="fu">across</span>()) <span class="sc">%&gt;%</span> <span class="co"># compute aggregated quantity (min/max)</span></span>
+<span id="cb134-17"><a href="#cb134-17" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">filter</span>(country <span class="sc">%in%</span> wanted_countries),</span>
+<span id="cb134-18"><a href="#cb134-18" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> minGdp, <span class="at">ymax =</span> maxGdp,</span>
+<span id="cb134-19"><a href="#cb134-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> year, <span class="at">color =</span> country, <span class="at">fill =</span> country),</span>
+<span id="cb134-20"><a href="#cb134-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb134-21"><a href="#cb134-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(continent)) <span class="sc">+</span></span>
+<span id="cb134-22"><a href="#cb134-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">&quot;Country GDP per capita compared with&quot;</span>,</span>
+<span id="cb134-23"><a href="#cb134-23" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;continent lower and upper bounds&quot;</span>),</span>
+<span id="cb134-24"><a href="#cb134-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;GDP per capita (PPP dollars)&quot;</span>)</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;continent&#39;, &#39;year&#39;. You can override using
 ## the `.groups` argument.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" />
-## Probability</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+</div>
+<div id="probability" class="section level2 hasAnchor" number="1.8">
+<h2><span class="header-section-number">1.8</span> Probability<a href="#probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Base R provide functions to handle almost any probability distribution.
 These functions are usually divided into four categories:</p>
 <ul>
@@ -829,64 +834,67 @@ These functions are usually divided into four categories:</p>
 <li>quantile function</li>
 <li>random function (sampling)</li>
 </ul>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>normal_samples <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># sample 10 Gaussian samples</span></span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>normal_samples</span></code></pre></div>
-<pre><code>##  [1]  0.7934312  0.6000998 -0.3744105 -0.1632292  0.0887751 -1.5097346
-##  [7] -0.4112181  1.3732920 -0.3619006  0.4757876</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(normal_samples, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># compute the density function (over another Normal)</span></span></code></pre></div>
-<pre><code>##  [1] 0.1926572378 0.1497483897 0.0238052003 0.0384376142 0.0642271769
-##  [6] 0.0008434102 0.0217982651 0.3278103722 0.0245209912 0.1248614895</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(normal_samples, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># cumulative distribution function</span></span></code></pre></div>
-<pre><code>##  [1] 0.78623669 0.72578014 0.35404945 0.43516900 0.53536968 0.06555558
-##  [7] 0.34045631 0.91516921 0.35871316 0.68288715</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># get the quantiles of a normal</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>normal_samples <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># sample 10 Gaussian samples</span></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>normal_samples</span></code></pre></div>
+<pre><code>##  [1] -0.44513378 -0.04556652  1.36037902 -1.10602305  1.91953707 -0.03499576
+##  [7] -0.98543433 -1.26062163 -0.66409390  0.37524201</code></pre>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(normal_samples, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># compute the density function (over another Normal)</span></span></code></pre></div>
+<pre><code>##  [1] 0.020075038 0.049237009 0.325141102 0.003206331 0.397652936 0.050310454
+##  [7] 0.004629309 0.001960089 0.011474401 0.106580170</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(normal_samples, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># cumulative distribution function</span></span></code></pre></div>
+<pre><code>##  [1] 0.3281115 0.4818279 0.9131450 0.1343583 0.9725418 0.4860416 0.1622054
+##  [8] 0.1037226 0.2533151 0.6462598</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># get the quantiles of a normal</span></span></code></pre></div>
 <pre><code>## [1] -1.644854  1.644854</code></pre>
 </div>
-<div id="extras" class="section level2 hasAnchor" number="1.8">
-<h2><span class="header-section-number">1.8</span> Extras<a href="#extras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="file-system-and-helper" class="section level3 hasAnchor" number="1.8.1">
-<h3><span class="header-section-number">1.8.1</span> File system and helper<a href="#file-system-and-helper" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="extras" class="section level2 hasAnchor" number="1.9">
+<h2><span class="header-section-number">1.9</span> Extras<a href="#extras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="file-system-and-helper" class="section level3 hasAnchor" number="1.9.1">
+<h3><span class="header-section-number">1.9.1</span> File system and helper<a href="#file-system-and-helper" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R language provides several tools for management of files and function help.
 Here some useful console commands. Note that most of them are also available
 on RStudio through the graphic interface (buttons).</p>
 <p>R saves all the variables and you can display them with <code>ls()</code>.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># clear up the space removing all variables stored so far</span></span>
-<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add some variables</span></span>
-<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb146-4"><a href="#cb146-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x[x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>]</span>
-<span id="cb146-5"><a href="#cb146-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb146-6"><a href="#cb146-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>() <span class="co"># check variables in the environment</span></span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># clear up the space removing all variables stored so far</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add some variables</span></span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x[x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb144-6"><a href="#cb144-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>() <span class="co"># check variables in the environment</span></span></code></pre></div>
 <pre><code>## [1] &quot;x&quot; &quot;y&quot;</code></pre>
 <p>The working directory is the folder located on your computer from which R
 navigates the filesystem.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># check your wd</span></span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># check your wd</span></span></code></pre></div>
 <pre><code>## [1] &quot;/Users/zemp/phd/teach_ms/lessons&quot;</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;./tmp&quot;</span>) <span class="co"># set the working directory to an arbitrary (existing) folder</span></span>
-<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="co"># save the current environment</span></span>
-<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&quot;./01_test.RData&quot;</span>)</span>
-<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check that it&#39;s on the working directory</span></span>
-<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dir</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;01_test.RData&quot;</code></pre>
-<p>RStudio typically does all of this automatically.</p>
-<p>You can also read function helpers simply by typing <code>?function_name</code>; this
-will open formatted page with information about a specific R function or object.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>?quit <span class="co"># help for the quit function</span></span>
-<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>?Arithmetic <span class="co"># help for more general syntax information</span></span>
-<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(Trig) <span class="co"># or use help(name)</span></span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;./tmp&quot;</span>) <span class="co"># set the working directory to an arbitrary (existing) folder</span></span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="co"># save the current environment</span></span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&quot;./01_test.RData&quot;</span>)</span>
+<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check that it&#39;s on the working directory</span></span>
+<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dir</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;01_test.RData&quot; &quot;index.html&quot;</code></pre>
+<p>RStudio typically save the environment automatically,
+but sometimes (if not every time you close R) you should
+clear the environment variables, because loading many variables
+when opening RStudio might fill up too much memory.</p>
+<p>You can also read function helpers simply by typing <code>?function_name</code>. This
+will open a formatted page with information about a specific R function or object.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>?quit <span class="co"># help for the quit function</span></span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>?Arithmetic <span class="co"># help for more general syntax information</span></span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(Trig) <span class="co"># or use help(name)</span></span></code></pre></div>
 </div>
-<div id="packages" class="section level3 hasAnchor" number="1.8.2">
-<h3><span class="header-section-number">1.8.2</span> Packages<a href="#packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="packages" class="section level3 hasAnchor" number="1.9.2">
+<h3><span class="header-section-number">1.9.2</span> Packages<a href="#packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Packages can be installed via command line using
 <code>install.packages("package_name")</code>, or through RStudio graphical interface.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the following function call is commented because package installation should</span></span>
-<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="co"># not be included in a script (but you can find it commented, showing that the</span></span>
-<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="co"># script requires a package as dependency)</span></span>
-<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb153-5"><a href="#cb153-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the following function call is commented because package installation should</span></span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="co"># not be included in a script (but you can find it commented, showing that the</span></span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a><span class="co"># script requires a package as dependency)</span></span>
+<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-5"><a href="#cb151-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span></code></pre></div>
 <p>And then you can load the package with <code>library</code>.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ## ✔ tidyr   1.2.1      ✔ dplyr   1.0.10
 ## ✔ readr   2.1.2      ✔ stringr 1.4.1 
@@ -895,32 +903,32 @@ will open formatted page with information about a specific R function or object.
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
-<div id="arrow-sign" class="section level3 hasAnchor" number="1.8.3">
-<h3><span class="header-section-number">1.8.3</span> Arrow sign<a href="#arrow-sign" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="arrow-sign" class="section level3 hasAnchor" number="1.9.3">
+<h3><span class="header-section-number">1.9.3</span> Arrow sign<a href="#arrow-sign" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The difference between <code>&lt;-</code> and <code>=</code> is not just programming <em>style</em> preference.
 Here an example where using <code>=</code> rather than <code>&lt;-</code> makes a difference:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gives error: argument &#39;b&#39; is not part of &#39;within&#39;</span></span>
-<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">within</span>(<span class="fu">data.frame</span>(<span class="at">a=</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)), <span class="at">b =</span> a<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gives error: argument &#39;b&#39; is not part of &#39;within&#39;</span></span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="fu">within</span>(<span class="fu">data.frame</span>(<span class="at">a=</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)), <span class="at">b =</span> a<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
 <pre><code>## Error in eval(substitute(expr), e): argument is missing, with no default</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;b&lt;-a^2&#39; is the value passed to the expr argument of within()</span></span>
-<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="fu">within</span>(<span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)), b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
-<pre><code>##          a        b
-## 1 2.820787 7.956839
-## 2 1.035587 1.072440</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;b&lt;-a^2&#39; is the value passed to the expr argument of within()</span></span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">within</span>(<span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)), b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
+<pre><code>##           a         b
+## 1 1.2296992 1.5121602
+## 2 0.2180819 0.0475597</code></pre>
 <p>Although this event might never occur in one’s programming experience, it’s
 safer (and more elegant) to use <code>&lt;-</code> when assigning variable.</p>
 <p>Besides, <code>-&gt;</code> is also valid and it is used (more intuitive) when assigning pipes
 result to variables.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
-<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">bmi =</span> mass <span class="sc">/</span> ((height <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">^</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb160-5"><a href="#cb160-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bmi)) <span class="sc">%&gt;%</span></span>
-<span id="cb160-6"><a href="#cb160-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
-<span id="cb160-7"><a href="#cb160-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">bmi =</span> <span class="fu">mean</span>(bmi)) <span class="sc">%&gt;%</span></span>
-<span id="cb160-8"><a href="#cb160-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(bmi)) <span class="ot">-&gt;</span> x</span>
-<span id="cb160-9"><a href="#cb160-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb160-10"><a href="#cb160-10" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span></span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">bmi =</span> mass <span class="sc">/</span> ((height <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">^</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(bmi)) <span class="sc">%&gt;%</span></span>
+<span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">bmi =</span> <span class="fu">mean</span>(bmi)) <span class="sc">%&gt;%</span></span>
+<span id="cb158-8"><a href="#cb158-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(bmi)) <span class="ot">-&gt;</span> x</span>
+<span id="cb158-9"><a href="#cb158-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-10"><a href="#cb158-10" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## # A tibble: 32 × 2
 ##    species          bmi
 ##    &lt;chr&gt;          &lt;dbl&gt;
@@ -937,8 +945,8 @@ result to variables.</p>
 ## # … with 22 more rows</code></pre>
 </div>
 </div>
-<div id="exercises" class="section level2 hasAnchor" number="1.9">
-<h2><span class="header-section-number">1.9</span> Exercises<a href="#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercises" class="section level2 hasAnchor" number="1.10">
+<h2><span class="header-section-number">1.10</span> Exercises<a href="#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>LogSumExp trick</li>
 </ol>
@@ -948,14 +956,14 @@ in a numerically stable way.
 See this
 <a href="https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations">Wiki paragraph</a>
 if you don’t know the trick yet.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>log_sum_exp3 <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b, c) {</span>
-<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># delete this function and re-write it using the trick</span></span>
-<span id="cb162-3"><a href="#cb162-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in order to make it work</span></span>
-<span id="cb162-4"><a href="#cb162-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">log</span>(<span class="fu">exp</span>(a) <span class="sc">+</span> <span class="fu">exp</span>(b) <span class="sc">+</span> <span class="fu">exp</span>(c)))</span>
-<span id="cb162-5"><a href="#cb162-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb162-6"><a href="#cb162-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb162-7"><a href="#cb162-7" aria-hidden="true" tabindex="-1"></a><span class="co"># test - this result is obviously wrong: edit the function above</span></span>
-<span id="cb162-8"><a href="#cb162-8" aria-hidden="true" tabindex="-1"></a><span class="fu">log_sum_exp3</span>(<span class="at">a =</span> <span class="sc">-</span><span class="dv">1000</span>, <span class="at">b =</span> <span class="sc">-</span><span class="dv">1001</span>, <span class="at">c =</span> <span class="sc">-</span><span class="dv">999</span>) <span class="co"># should give -998.5924</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>log_sum_exp3 <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b, c) {</span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># delete this function and re-write it using the trick</span></span>
+<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in order to make it work</span></span>
+<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">log</span>(<span class="fu">exp</span>(a) <span class="sc">+</span> <span class="fu">exp</span>(b) <span class="sc">+</span> <span class="fu">exp</span>(c)))</span>
+<span id="cb160-5"><a href="#cb160-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb160-6"><a href="#cb160-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-7"><a href="#cb160-7" aria-hidden="true" tabindex="-1"></a><span class="co"># test - this result is obviously wrong: edit the function above</span></span>
+<span id="cb160-8"><a href="#cb160-8" aria-hidden="true" tabindex="-1"></a><span class="fu">log_sum_exp3</span>(<span class="at">a =</span> <span class="sc">-</span><span class="dv">1000</span>, <span class="at">b =</span> <span class="sc">-</span><span class="dv">1001</span>, <span class="at">c =</span> <span class="sc">-</span><span class="dv">999</span>) <span class="co"># should give -998.5924</span></span></code></pre></div>
 <pre><code>## [1] -Inf</code></pre>
 
 </div>

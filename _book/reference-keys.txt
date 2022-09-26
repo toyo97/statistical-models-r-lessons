@@ -22,6 +22,7 @@ lists-and-dataframes
 data-manipulation
 plotting
 examples-plot-and-data-manipulation
+probability
 extras
 file-system-and-helper
 packages

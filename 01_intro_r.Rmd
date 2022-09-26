@@ -49,7 +49,7 @@ statisticians
 - [**RStudio**](https://www.rstudio.com/): development environment, software for
 editing and running R (and Python) applications
   
-  ! It's going to change name soon, see [Posit](https://posit.co/)
+  It's going to change name soon, see [Posit](https://posit.co/)
   
 ### Installation
 
@@ -168,6 +168,7 @@ Every variable in R is an object, which holds a value (or collection of values) 
 ### Base types
 
 There are 5 basic data types:
+
 - **numeric** (real numbers)
 - **integer**
 - **logical** (aka boolean)
@@ -208,7 +209,7 @@ The `logical` type can only hold `TRUE` or `FALSE` (in capital letters)
 ```{r}
 bool_a <- FALSE
 bool_b <- T # T and F are short for TRUE and FALSE
-bool_a == !bool_b # if 'A' is not equal to 'not B', raise an error
+bool_a | !bool_b # logical or between F and not-T
 ```
 You can test the value of a boolean also using `0,1`
 ```{r}
@@ -478,9 +479,9 @@ The `dplyr` library provides an intuitive way of working with datasets.
 For instance, let's consider the `mtcars` dataset.
 
 ```{r}
-mtcars$modelname <- rownames(mtcars)
-mtcars <- as_tibble(mtcars)
-mtcars
+mtcars$modelname <- rownames(mtcars) # name column with models
+mtcars <- as_tibble(mtcars) # convert to tibble
+mtcars # display the raw data
 ```
 Let's say we want to get the cars with more than 100 hp, and we are just
 interested in the car model name and we want the data to be sorted in alphabetic
@@ -522,7 +523,7 @@ The same plot shown before can be drawn with ggplot in the following way.
 
 ```{r}
 library(ggplot2)
-gg_df <- data_frame(x = x, y = y)
+gg_df <- tibble(x = x, y = y)
 
 ggplot(gg_df) +
   geom_point(mapping = aes(x, y)) +
@@ -562,9 +563,11 @@ gapminder %>%
   ggplot() +
     geom_line(aes(year, gdpPercap, color = country))
 ```
+
 If we want to add some information about the same measure over the whole
 continent, showing for instance the boundaries of GDP among all countries
-in the same continent of the four selected countries.
+in the same continent of the four selected countries, this
+is more or less what we can do
 
 ```{r}
 # give all the data to ggplot, we'll filter later
@@ -612,6 +615,7 @@ gapminder %>%
            "continent lower and upper bounds"),
            x = "year", y = "GDP per capita (PPP dollars)")
 ```
+
 ## Probability
 
 Base R provide functions to handle almost any probability distribution.
@@ -663,10 +667,13 @@ save.image("./01_test.RData")
 # check that it's on the working directory
 dir()
 ```
-RStudio typically does all of this automatically.
+RStudio typically save the environment automatically,
+but sometimes (if not every time you close R) you should
+clear the environment variables, because loading many variables 
+when opening RStudio might fill up too much memory.
 
-You can also read function helpers simply by typing `?function_name`; this
-will open formatted page with information about a specific R function or object.
+You can also read function helpers simply by typing `?function_name`. This
+will open a formatted page with information about a specific R function or object.
 
 ```{r}
 ?quit # help for the quit function
