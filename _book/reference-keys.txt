@@ -19,9 +19,11 @@ vectors
 matrices
 arrays
 lists-and-dataframes
+data-manipulation
 plotting
-sampling
+examples-plot-and-data-manipulation
 extras
 file-system-and-helper
+packages
 arrow-sign
 exercises
