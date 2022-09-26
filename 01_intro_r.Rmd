@@ -1,11 +1,40 @@
 ---
 title: "Intro R"
 author: "Vittorio Zampinetti^[vittorio.zampinetti@polito.it]"
-date: "`r Sys.Date()`"
-output: bookdown::gitbook
+date: "2022-09-26"
+output: 
+  bookdown::gitbook:
+    config:
+      toc:
+        scroll_highlight: true
+        before: null
+        after: null
+      toc_float:
+        collapsed: false
+        smooth_scroll: true
+      toolbar:
+        position: fixed
+      edit : null
+      download: null
+      search:
+        engine: lunr # or fuse
+        # options to control/tune search engine behavior (for
+        # fuse.js, refer to https://fusejs.io/api/options.html)
+        options: null
+      fontsettings:
+        theme: white
+        family: sans
+        size: 2
+      sharing:
+        github: true
+        twitter: false
+        facebook: false
+        all: ['github']
+      info: truek
 documentclass: book
 github-repo: toyo97/statistical-models-r
 description: "R tutorial based on Modelli Statistici course at PoliTo"
+
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +51,7 @@ editing and running R (and Python) applications
   
   ! It's going to change name soon, see [Posit](https://posit.co/)
   
-## Installation
+### Installation
 
 First install R programming language (from [here](https://cran.rstudio.com/)),
 then RStudio environment (from
@@ -74,6 +103,10 @@ if (b == 4 & a > 0) { # if-else statement
   stop("error") # stop program and exit
 }
 ```
+
+While `<-` is only used for variable assignment, i.e. filling up the variable
+allocated space with some value, the `=` is both used for assignment and
+function argument passing (as introduced in [Functions](#functions)).
 
 ## Functions
 
@@ -394,82 +427,270 @@ dim(sliced_arr) # reduces ndims by one (dimension selected is dropped)
 
 ### Lists and dataframes
 
+Lists are containers that can hold different data types. Each entry,
+which can even be another list, has a position in the list and can also
+be named.
+
+```{r}
+list1  <- list(1:3, TRUE, x = c("a", "b", "c"))
+list1
+list1[[3]] # access with through index
+list1$x # access through name
+```
+
+Dataframes are collections of columns that have the same length.
+Contrarily to matrices, columns in dataframes can be of different types.
+They are the most common way of representing structured data and 
+most of the dataset will be stored in dataframes.
+
+```{r}
+df1 <- data.frame(x = 1, y = 1:10,
+           char = sample(c("a", "b"), 10, replace = TRUE))
+
+df1 # x was set to just one value and gets repeated ('recycled')
+df1[[2]] # access through column index
+df1$x # access through column name
+df1[, 3] # access with matrix-style index
+df1[2:4, ] # can also select subset of rows
+```
+
+The `dplyr` library provides another dataframe object (called *tibble*) which has all 
+the effective features of Base R `data.frame` and none of the 
+deprecated functionalities. It's simply a newer version of dataframes (therefore
+recommended over the old one).
+
+```{r}
+library("tibble")
+tibble(x = 1:15, y = 1, z = x / y) # tibble dataframe 
+```
+
+For more information on tibble and its advantages with respect to traditional
+dataframes, type `vignette("tibble")` in an R console.
+Notice that you can convert datasets to tibble with `as_tibble()`, while 
+with `as.data.frame()` you will get a Base R dataframe.
+
+## Data manipulation
+
+Now that we know what a dataframe is and how it is generated,
+we can focus on data manipulation.
+
+The `dplyr` library provides an intuitive way of working with datasets.
+For instance, let's consider the `mtcars` dataset.
+
+```{r}
+mtcars$modelname <- rownames(mtcars)
+mtcars <- as_tibble(mtcars)
+mtcars
+```
+Let's say we want to get the cars with more than 100 hp, and we are just
+interested in the car model name and we want the data to be sorted in alphabetic
+order.
+
+```{r}
+mtcars %>% # send the data into the transformation pipe
+  dplyr::filter(hp > 100) %>% # filter rows with hp > 100
+  dplyr::select(modelname) %>% # filter columns (select only modelname col)
+  dplyr::arrange(modelname) # display in alphabetic order
+```
+There are many other dplyr functions for data transformation. This useful
+[cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf)
+summarizes most of them for quick access.
+
 ## Plotting
 
-## Sampling
+In base R plots are built with several calls to functions, each of which
+edit the current canvas. For instance, to plot some points and a line:
+
+```{r}
+# generate synthetic data
+n_points <- 20
+x = 1:n_points
+y = 3 * x + 2 * rnorm(n_points) 
+
+plot(x, y)
+abline(a = 0, b = 3, col = 'red')
+```
+
+However, the `ggplot` library is now the new standard plotting library.
+In ggplot, a plot is decomposed in three main components: data, coordinate 
+system and visual marks, called *geoms*.
+The plot is built by stacking up layers of visualization objects.
+Data is in form of dataframes and the columns are selected in the aesthetics
+arguments.
+
+The same plot shown before can be drawn with ggplot in the following way.
+
+```{r}
+library(ggplot2)
+gg_df <- data_frame(x = x, y = y)
+
+ggplot(gg_df) +
+  geom_point(mapping = aes(x, y)) +
+  geom_abline(mapping = aes(intercept = 0, slope = 3), color = "red")
+```
+
+This is just a brief example. More will be seen in the next lessons.
+Check out this
+[cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
+for quick look-up on ggplot functions.
+
+## Examples: plot and data manipulation
+
+Combining altogether, here a data visualization workflow on the 
+[Gapminder](https://www.gapminder.org/data/) dataset.
+
+```{r}
+library(gapminder)
+# have a quick look at the Gapminder dataset
+str(gapminder)
+```
+A factor, which we haven't seen yet, is just a data-type characterizing a
+discrete categorical variable; the levels of a factor describe how many
+distinct categories it can take value from (e.g. the variable `continent` takes
+values from the set `{Africa, Americas, Asia, Europe, Oceania}`).
+
+Let's say we want to compare the GDP per capita of some
+different countries (Italy, Japan, Brasil and Ethiopia), 
+plotted against time (year by year).
+
+```{r}
+# transform the dataset according to what is necessary
+wanted_countries <- c("Italy", "Japan", "Brazil", "Ethiopia")
+gapminder %>%
+  dplyr::filter(country %in% wanted_countries) %>%
+  # now feed the filtered data to ggplot (using the pipe op)
+  ggplot() +
+    geom_line(aes(year, gdpPercap, color = country))
+```
+If we want to add some information about the same measure over the whole
+continent, showing for instance the boundaries of GDP among all countries
+in the same continent of the four selected countries.
+
+```{r}
+# give all the data to ggplot, we'll filter later
+gapminder %>%
+  ggplot() +
+    geom_line(data = . %>% 
+      dplyr::filter(country %in% wanted_countries),
+              aes(year, gdpPercap, color = country)) + 
+    # now group by continent and get the upper/lower bounds
+    geom_ribbon(data = . %>%
+      dplyr::filter(!is.na(gdpPercap)) %>% # min(NA) = NA, make sure NAs are excluded
+      dplyr::group_by(continent, year) %>% # gather all entries for each continent separately
+      dplyr::summarize(minGdp = min(gdpPercap), maxGdp = max(gdpPercap), across()) %>% # compute aggregated quantity (min/max)
+      dplyr::filter(country %in% wanted_countries),
+              aes(ymin = minGdp, ymax = maxGdp,
+                  x = year, color = country, fill = country),
+              alpha = 0.1, linetype = "dashed", size = 0.2) -> plt
+plt
+```
+But, since it looks a bit confusing, we might want four separate plots.
+
+```{r}
+gapminder %>% 
+  dplyr::filter(country %in% wanted_countries) %>%
+  dplyr::pull(continent) %>% # extract one column from a dataframe (different from select)
+  unique() -> wanted_continents
+
+gapminder %>%
+  dplyr::filter(continent %in% wanted_continents) %>%
+  ggplot() +
+    geom_line(data = . %>% 
+      dplyr::filter(country %in% wanted_countries),
+              aes(year, gdpPercap, color = country)) + 
+    # now group by continent and get the upper/lower bounds
+    geom_ribbon(data = . %>%
+      dplyr::filter(!is.na(gdpPercap)) %>% # min(NA) = NA, make sure NAs are excluded
+      dplyr::group_by(continent, year) %>% # gather all entries for each continent separately
+      dplyr::summarize(minGdp = min(gdpPercap), maxGdp = max(gdpPercap), across()) %>% # compute aggregated quantity (min/max)
+      dplyr::filter(country %in% wanted_countries),
+              aes(ymin = minGdp, ymax = maxGdp,
+                  x = year, color = country, fill = country),
+              alpha = 0.1, linetype = "dashed", size = 0.2) +
+      facet_wrap(vars(continent)) +
+      labs(title = paste("Country GDP per capita compared with",
+           "continent lower and upper bounds"),
+           x = "year", y = "GDP per capita (PPP dollars)")
+```
+## Probability
+
+Base R provide functions to handle almost any probability distribution.
+These functions are usually divided into four categories:
+
+- density function
+- distribution function
+- quantile function
+- random function (sampling)
+
+```{r}
+n <- 10
+normal_samples <- rnorm(n = n, mean = 0, sd = 1) # sample 10 Gaussian samples
+normal_samples
+
+dnorm(normal_samples, mean = 2, sd = 1) # compute the density function (over another Normal)
+pnorm(normal_samples, mean = 0, sd = 1) # cumulative distribution function
+
+qnorm(c(0.05, 0.95), mean = 0, sd = 1) # get the quantiles of a normal
+```
 
 ## Extras
 
 ### File system and helper
 
 R language provides several tools for management of files and function help.
+Here some useful console commands. Note that most of them are also available
+on RStudio through the graphic interface (buttons).
+
+R saves all the variables and you can display them with `ls()`.
+```{r}
+rm(list = ls()) # clear up the space removing all variables stored so far
+# let's add some variables
+x <- 1:10
+y <- x[x %% 2 == 0]
+
+ls() # check variables in the environment
+```
+
+The working directory is the folder located on your computer from which R
+navigates the filesystem.
+```{r}
+getwd() # check your wd
+```
+```{r}
+setwd("./tmp") # set the working directory to an arbitrary (existing) folder
+# save the current environment
+save.image("./01_test.RData")
+# check that it's on the working directory
+dir()
+```
+RStudio typically does all of this automatically.
+
+You can also read function helpers simply by typing `?function_name`; this
+will open formatted page with information about a specific R function or object.
 
 ```{r}
-# quali sono gli oggetti memorizzati nella console?
+?quit # help for the quit function
 
-ls()
-
-# dove stiamo lavorando? Ossia in quale directory di lavoro (working directory) stiamo memorizzando i nostri dati?
-
-getwd()
-
-
-# proviamo a cambiare la directory di lavoro
-# setwd("C:/Users/marti/OneDrive/Desktop/modelli_statistici/")
-getwd()
-
-# tutto cio' che salveremo da adesso in poi, verrà memorizzato in questa directory di lavoro.
-
-# salviamo l'intero workspace dando un nome nostro file
-
-# save.image("Lez1.RData")
-
-# e vediamo che files sono stati salvati nella nostra directory di lavoro
-
-dir(all.files=TRUE)
-#oppure
-list.files()
-
-### Uscire: 2 diverse possibilità
-### 1) chiudiamo dalla crocetta rossa: Salva area di lavoro? SI NO
-### 2) digitiamo q()
-### 1) e 2) salvano i seguenti oggetti:
-###### File .RData : contiene il risultato di ciò che abbiamo eseguito 
-###### File .Rhistory: i comandi eseguiti (script)
-
-
-
-# Ripartiamo dalla sessione precedente andando a pescare
-# il file .RData dalla directory opportuna oppure       
-# reimpartendo tutti i comandi precedenti memorizzati   
-# nel file .Rhistory                                    
-
-#######
-##### Come orientarsi e chiedere aiuto ad R?
-#######
-
-help.start() # Browser
-
-#Per quanto riguarda la documentazione sulla sintassi di specifici comandi ed i
-#relativi argomenti opzionali sono utili i comandi in linea
-# help()
-# help.search()
-
-help(quit)
-#oppure
-?quit
-
-# Quante altre operazioni numeriche e con quale sintassi?
-?Arithmetic
-help(Arithmetic)
-help(Trig)
-help(Special)
- 
-# Una volta ripresa la sessione in "R console"
-# vediamo cosa altro puo' fare l'ambiente R    
+?Arithmetic # help for more general syntax information
+help(Trig) # or use help(name)
 ```
-Most of these commands are also available throught RStudio graphical interface
 
+### Packages
+
+Packages can be installed via command line using 
+`install.packages("package_name")`, or through RStudio graphical interface.
+```{r}
+# the following function call is commented because package installation should
+# not be included in a script (but you can find it commented, showing that the
+# script requires a package as dependency)
+
+# install.packages("tidyverse")
+
+```
+And then you can load the package with `library`.
+```{r}
+library(tidyverse)
+```
 
 ### Arrow sign
 
@@ -505,17 +726,20 @@ x
 
 1. LogSumExp trick
 
-```{r}
-log_sum_exp2 <- function(a, b) {
-  max_el <- max(a, b)
-  sum_exp <- sum(c(exp(a - max_el), exp(b - max_el)))
-  return(log( sum_exp ) + max_el)
-}
-log_sum_exp2(a = -1000, b = -1001)
-# see log-sum-exp trick:
-# https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations
-```
+Try to implement the log-sum-exp trick in a function that takes as argument
+three `numeric` variables and computed the log of the sum of the exponentials
+in a numerically stable way.
+See this
+[Wiki paragraph](https://en.wikipedia.org/wiki/LogSumExp#log-sum-exp_trick_for_log-domain_calculations)
+if you don't know the trick yet.
 
-While `<-` is only used for variable assignment, i.e. filling up the variable
-allocated space with some value, the `=` is both used for assignment and
-function argument passing (as introduced in [Functions](#functions)).
+```{r}
+log_sum_exp3 <- function(a, b, c) {
+  # delete this function and re-write it using the trick
+  # in order to make it work
+  return(log(exp(a) + exp(b) + exp(c)))
+}
+
+# test - this result is obviously wrong: edit the function above
+log_sum_exp3(a = -1000, b = -1001, c = -999) # should give -998.5924
+```
