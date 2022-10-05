@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Statistical Models in R</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
@@ -280,8 +280,8 @@ function argument passing (as introduced in <a href="introduction.html#functions
 <span id="cb11-2"><a href="introduction.html#cb11-2" aria-hidden="true" tabindex="-1"></a>array <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">10</span>) <span class="co"># sd is an argument, </span></span>
 <span id="cb11-3"><a href="introduction.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># the mean is left to the default 0</span></span>
 <span id="cb11-4"><a href="introduction.html#cb11-4" aria-hidden="true" tabindex="-1"></a>array</span></code></pre></div>
-<pre><code>##  [1] 13.9451393 -7.1176737 -9.4431784  8.8934239  4.6542653  5.3000924
-##  [7] 14.5690151  0.9156836 18.9044585 -6.7012162</code></pre>
+<pre><code>##  [1]   6.299035 -27.518119  -4.045414  10.591957  -5.960439  -3.479987
+##  [7] -22.811880  -2.598599  11.833720  -4.046483</code></pre>
 <p>You can explicitly call the arguments to which you want to pass the parameters
 (e.g. sd of the Gaussian). In this case it is necessary, because the second
 position argument is the mean, but we want it to be the default.</p>
@@ -634,26 +634,26 @@ most of the dataset will be stored in dataframes.</p>
 <span id="cb111-4"><a href="introduction.html#cb111-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="co"># x was set to just one value and gets repeated (&#39;recycled&#39;)</span></span></code></pre></div>
 <pre><code>##    x  y char
 ## 1  1  1    b
-## 2  1  2    a
+## 2  1  2    b
 ## 3  1  3    a
-## 4  1  4    a
+## 4  1  4    b
 ## 5  1  5    b
 ## 6  1  6    a
 ## 7  1  7    a
-## 8  1  8    a
+## 8  1  8    b
 ## 9  1  9    a
-## 10 1 10    b</code></pre>
+## 10 1 10    a</code></pre>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction.html#cb113-1" aria-hidden="true" tabindex="-1"></a>df1[[<span class="dv">2</span>]] <span class="co"># access through column index</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction.html#cb115-1" aria-hidden="true" tabindex="-1"></a>df1<span class="sc">$</span>x <span class="co"># access through column name</span></span></code></pre></div>
 <pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction.html#cb117-1" aria-hidden="true" tabindex="-1"></a>df1[, <span class="dv">3</span>] <span class="co"># access with matrix-style index</span></span></code></pre></div>
-<pre><code>##  [1] &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot;</code></pre>
+<pre><code>##  [1] &quot;b&quot; &quot;b&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot;</code></pre>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction.html#cb119-1" aria-hidden="true" tabindex="-1"></a>df1[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ] <span class="co"># can also select subset of rows</span></span></code></pre></div>
 <pre><code>##   x y char
-## 2 1 2    a
+## 2 1 2    b
 ## 3 1 3    a
-## 4 1 4    a</code></pre>
+## 4 1 4    b</code></pre>
 <p>The <code>dplyr</code> library provides another dataframe object (called <em>tibble</em>) which has all
 the effective features of Base R <code>data.frame</code> and none of the
 deprecated functionalities. It’s simply a newer version of dataframes (therefore
@@ -866,14 +866,14 @@ These functions are usually divided into four categories:</p>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction.html#cb140-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb140-2"><a href="introduction.html#cb140-2" aria-hidden="true" tabindex="-1"></a>normal_samples <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># sample 10 Gaussian samples</span></span>
 <span id="cb140-3"><a href="introduction.html#cb140-3" aria-hidden="true" tabindex="-1"></a>normal_samples</span></code></pre></div>
-<pre><code>##  [1] -1.116223972 -1.100568677 -1.130466838  0.001286327 -0.601195239
-##  [6] -0.483271908  0.312010652 -0.090273060  2.202108137 -0.769163806</code></pre>
+<pre><code>##  [1]  0.393282716  0.003847604 -0.589547681  0.956653738 -1.188828423
+##  [6] -1.003312469 -0.572399806  0.007473699 -1.017379345 -0.169079179</code></pre>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(normal_samples, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># compute the density function (over another Normal)</span></span></code></pre></div>
-<pre><code>##  [1] 0.003106171 0.003261065 0.002971020 0.054130001 0.013540814 0.018274325
-##  [7] 0.095982197 0.044889145 0.390876986 0.008625153</code></pre>
+<pre><code>##  [1] 0.109732604 0.054407638 0.013956400 0.231488694 0.002470705 0.004388001
+##  [7] 0.014587958 0.054802522 0.004206066 0.037953605</code></pre>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="introduction.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(normal_samples, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># cumulative distribution function</span></span></code></pre></div>
-<pre><code>##  [1] 0.1321631 0.1355422 0.1291398 0.5005132 0.2738550 0.3144513 0.6224838
-##  [8] 0.4640351 0.9861712 0.2208980</code></pre>
+<pre><code>##  [1] 0.6529447 0.5015350 0.2777470 0.8306290 0.1172536 0.1578551 0.2835256
+##  [8] 0.5029815 0.1544865 0.4328672</code></pre>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="introduction.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># get the quantiles of a normal</span></span></code></pre></div>
 <pre><code>## [1] -1.644854  1.644854</code></pre>
 </div>
@@ -923,11 +923,11 @@ will open a formatted page with information about a specific R function or objec
 <span id="cb154-5"><a href="introduction.html#cb154-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span></code></pre></div>
 <p>And then you can load the package with <code>library</code>.</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────────── tidyverse 1.3.2 ──
+<pre><code>## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.2 ──
 ## ✔ tidyr   1.2.1     ✔ stringr 1.4.1
 ## ✔ readr   2.1.2     ✔ forcats 0.5.2
 ## ✔ purrr   0.3.4     
-## ── Conflicts ────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
@@ -940,9 +940,9 @@ Here an example where using <code>=</code> rather than <code>&lt;-</code> makes 
 <pre><code>## Error in eval(substitute(expr), e): argument is missing, with no default</code></pre>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="introduction.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;b&lt;-a^2&#39; is the value passed to the expr argument of within()</span></span>
 <span id="cb159-2"><a href="introduction.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="fu">within</span>(<span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)), b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
-<pre><code>##              a            b
-## 1 -0.006336495 4.015117e-05
-## 2 -0.894681269 8.004546e-01</code></pre>
+<pre><code>##            a         b
+## 1 -0.5111961 0.2613215
+## 2  0.8844821 0.7823085</code></pre>
 <p>Although this event might never occur in one’s programming experience, it’s
 safer (and more elegant) to use <code>&lt;-</code> when assigning variable.</p>
 <p>Besides, <code>-&gt;</code> is also valid and it is used (more intuitive) when assigning pipes
@@ -1033,7 +1033,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01_intro.Rmd",
+"link": "https://github.com/toyo97/statistical-models-r-dup/edit/master/01_intro.Rmd",
 "text": "Edit"
 },
 "history": {
