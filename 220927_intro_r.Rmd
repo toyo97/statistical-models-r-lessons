@@ -1,6 +1,8 @@
 ---
 title: "Intro R"
-author: "Vittorio Zampinetti^[vittorio.zampinetti@polito.it]"
+author: 
+ - Vittorio Zampinetti^[Politecnico di Torino, vittorio.zampinetti@polito.it]
+ - Mauro Gasparini^[Politecnico di Torino, mauro.gasparini@polito.it]
 date: "2022-09-27"
 output: pdf_document
 description: R tutorial based on Modelli Statistici course at PoliTo
@@ -9,6 +11,7 @@ description: R tutorial based on Modelli Statistici course at PoliTo
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 # Introduction
 
 ## R and RStudio
@@ -405,13 +408,12 @@ be named.
 list1  <- list(1:3, TRUE, x = c("a", "b", "c"))
 list1
 list1[[3]] # access with through index
-list1$x # access through name
 ```
 
 Dataframes are collections of columns that have the same length.
 Contrarily to matrices, columns in dataframes can be of different types.
 They are the most common way of representing structured data and 
-most of the dataset will be stored in dataframes.
+ost of the dataset will be stored in dataframes.
 
 ```{r}
 df1 <- data.frame(x = 1, y = 1:10,
@@ -631,7 +633,7 @@ navigates the filesystem.
 ```{r}
 getwd() # check your wd
 ```
-```{r}
+```{r, eval=FALSE}
 setwd("./tmp") # set the working directory to an arbitrary (existing) folder
 # save the current environment
 save.image("./01_test.RData")
@@ -646,7 +648,7 @@ when opening RStudio might fill up too much memory.
 You can also read function helpers simply by typing `?function_name`. This
 will open a formatted page with information about a specific R function or object.
 
-```{r}
+```{r, eval=FALSE}
 ?quit # help for the quit function
 
 ?Arithmetic # help for more general syntax information

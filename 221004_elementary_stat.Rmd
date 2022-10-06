@@ -1,11 +1,11 @@
 ---
 title: "Elementary statistics concepts"
-author: "Vittorio Zampinetti^[vittorio.zampinetti@polito.it]"
+author: 
+ - Vittorio Zampinetti^[Politecnico di Torino, vittorio.zampinetti@polito.it]
+ - Mauro Gasparini^[Politecnico di Torino, mauro.gasparini@polito.it]
 date: "2022-10-04"
 output:
   pdf_document: default
-  html_document:
-    df_print: paged
 description: R tutorial based on Modelli Statistici course at PoliTo
 ---
 
