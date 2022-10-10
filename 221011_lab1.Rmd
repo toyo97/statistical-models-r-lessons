@@ -1,14 +1,14 @@
 ---
-title: "Lab 1"
+title: "Lab #1"
 author:
 - Vittorio Zampinetti^[Politecnico di Torino, vittorio.zampinetti@polito.it]
 - Mauro Gasparini^[Politecnico di Torino, mauro.gasparini@polito.it]
-date: "2022-10-04"
+date: "2022-10-11"
 output:
   pdf_document: default
   html_document: default
 urlcolor: blue
-description: "Lab n1 - Iris dataset"
+description: "Lab #1 - Iris dataset"
 ---
 
 # Lab 1
