@@ -7,6 +7,7 @@ date: "2022-10-04"
 output:
   pdf_document: default
   html_document: default
+urlcolor: blue
 description: "Lab n1 - Iris dataset"
 ---
 
@@ -14,7 +15,7 @@ description: "Lab n1 - Iris dataset"
 
 ## Iris Dataset
 
-Download the dataset at [this link](https://archive.ics.uci.edu/ml/datsets/iris)
+Download the dataset at this link ([https://archive.ics.uci.edu/ml/datsets/iris](https://archive.ics.uci.edu/ml/datsets/iris))
 (look for the `iris.data` file) and place the file together with your R script (for simplicity).
 At that web page, you can also get some information regarding the origin and
 nature of the data.
@@ -32,7 +33,7 @@ the function arguments. Also, you might need to manually add the column names.
 To check which column names should be added and in which order,
 check under **"attribute information"** on the dataset reference page linked above.
 
-```{r, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(tidyverse) # we will use tibble, dplyr, ggplot, readr, ...
 ```
 
@@ -75,7 +76,7 @@ Let's make our decision more statistically relevant.
 Select only one class, the Setosa type, and one measure, petal length.
 
 Now, under the null hypothesis $H_0: \mu = \mu_0$ where we fix $\mu_0$ to the
-sample mean of the setosa petal legth measures, build a 95% CI around the mean value of the Setosa petal length.
+sample mean of the setosa petal length measures, build a 95% CI around the mean value of the Setosa petal length.
 Assume $\sigma$ unknown.
 
 Formally, we want to find $x_l, x_u$ s.t.
