@@ -125,11 +125,12 @@ to quantify our confidence.
 
 - What is the *p-value* of this sample, only looking at the 
   petal length, against the null hypothesis that the
-  samples are coming from the Setosa type?
+  samples are coming from the Setosa type? We set the null
+  hypothesis to be $H_0: \mu = \mu_0 = \bar{x}$
 
   Remember that the *p-value* is defined as
 
-$$ P\left(T \geq \frac{(\bar{\mathbf{x}} - \mu_0)\sqrt{n}}{s} | \mu = \mu_0\right)$$
+$$ P\left(T \geq \frac{(\bar{x} - \mu_0)\sqrt{n}}{s} | \mu = \mu_0\right)$$
 
 - Based on the value you found, what can you say
   about the class of this sample?
