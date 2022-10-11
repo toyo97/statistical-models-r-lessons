@@ -15,7 +15,7 @@ description: "Lab #1 - Iris dataset"
 
 ## Iris Dataset
 
-Download the dataset at this link ([https://archive.ics.uci.edu/ml/datsets/iris](https://archive.ics.uci.edu/ml/datsets/iris))
+Download the dataset at this link ([https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris))
 (look for the `iris.data` file) and place the file together with your R script (for simplicity).
 At that web page, you can also get some information regarding the origin and
 nature of the data.
