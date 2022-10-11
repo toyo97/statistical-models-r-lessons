@@ -75,8 +75,7 @@ read the help document of the `ggpairs()` function. You can also use R base `pai
 Let's make our decision more statistically relevant.
 Select only one class, the Setosa type, and one measure, petal length.
 
-Now, under the null hypothesis $H_0: \mu = \mu_0$ where we fix $\mu_0$ to the
-sample mean of the setosa petal length measures, build a 95% CI around the mean value of the Setosa petal length.
+Now build a 95% CI around the mean value of the Setosa petal length.
 Assume $\sigma$ unknown.
 
 Formally, we want to find $x_l, x_u$ s.t.
