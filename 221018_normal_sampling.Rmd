@@ -327,7 +327,7 @@ mu <- rnorm(1)
 x <- rnorm(n, mu)
 ```
 
-## Multivariate Normal random samples
+# Multivariate Normal random samples
 
 Multivariate normal distribution functions are provided by the `mvtnorm` library.
 
@@ -388,7 +388,7 @@ bvt_grid %>%
   coord_fixed(xlim = c(-3, 3), ylim = c(-5, 5), ratio = -.7)
 ```
 
-### Exercises
+## Exercises
 
 Take two bivariate random variables (the same as before, $X, S$).
 Complete these tasks:
@@ -398,7 +398,7 @@ b. Compute $P(X < 0 \cap S< 0)$ by simulation (Monte Carlo estimate)
 c. Compute $P(X > 1 \cap S < 0)$ by simulation. Can you do it with `pmvnorm`?
 (hint: check `?pmvnorm`)
 
-### Solutions
+## Solutions
 
 a.
 ```{r}
