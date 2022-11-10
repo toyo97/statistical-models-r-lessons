@@ -170,6 +170,7 @@ As already seen before, some plotting functions also draw a confidence region
 for the regression line.
 
 ```{r}
+library(ggplot2)
 ggplot(radio_lm, mapping = aes(Radio, Sales)) +
   geom_point() +
   geom_smooth(method = "lm", color = "red")

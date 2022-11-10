@@ -56,6 +56,7 @@ but if we plot the residuals, we can detect some issues for low
 values of $y$ (definitely not uncorrelated).
 
 ```{r}
+library(dplyr)
 synth %>%
   mutate(res = naive_lm$residuals) %>% # adds the residual column
   ggplot() +
