@@ -7,7 +7,7 @@ date: "2022-11-17"
 output:
   pdf_document: 
     latex_engine: lualatex
-  urlcolor: blue
+urlcolor: blue
 
 description: R tutorial based on Modelli Statistici course at PoliTo
 ---
@@ -171,6 +171,6 @@ $$
 linear regression R lecture
 
 - Check your computations using `predict.lm(..., interval = "prediction")`
-- Is the interval center the same af for the confidence intervals?
+- Is the interval center the same as for the confidence intervals?
 - Is it wider or more narrow than the CI? Can you tell why (intuitively)?
 
