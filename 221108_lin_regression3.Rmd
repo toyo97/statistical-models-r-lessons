@@ -217,7 +217,7 @@ available columns
 complete_lm <- lm(distance ~ ., data = golf)
 ```
 
-and we can copare it to a smaller model with ANOVA test.
+and we can compare it to a smaller model with ANOVA test.
 
 ```{r}
 small_lm = lm(distance ~ golfer, data = golf)
