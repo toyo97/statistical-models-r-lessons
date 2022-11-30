@@ -36,6 +36,7 @@ Although it's not necessary in this case, we explicitly specify
 that the `when` variable needs to be parsed as factor.
 
 ```{r}
+library(dplyr)
 library(readr)
 # read the dataset
 insulate <- read_csv("./datasets/insulate.csv", col_types = cols(
@@ -204,7 +205,7 @@ inference of $C \beta$. Being just one row, the F-type intervals can be
 translated to T-type intervals:
 
 $$
-F_{\alpha}(1, n-p) = t_{\frac{\alpha}{2}}(n-p)
+F_{\alpha}(1, n-p) = t^2_{\frac{\alpha}{2}}(n-p)
 $$
 
 These are standard confidence intervals, and you can find
@@ -322,7 +323,6 @@ Plotting of the intervals was not required, but it might be useful to visualize 
 For this purpose, we will just use the records of the `after` class.
 
 ```{r}
-library(dplyr)
 # build x grid
 after_insulate <- 
   insulate %>%

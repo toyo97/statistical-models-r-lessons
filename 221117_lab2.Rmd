@@ -113,7 +113,7 @@ inference of $C \beta$. Being just one row, the F-type intervals can be
 translated to T-type intervals:
 
 $$
-F_{\alpha}(1, n-p) = t_{\frac{\alpha}{2}}(n-p)
+F_{\alpha}(1, n-p) = t^2_{\frac{\alpha}{2}}(n-p)
 $$
 
 These are standard confidence intervals, and you can find
