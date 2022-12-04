@@ -268,18 +268,18 @@ $$
 or the response probabilities, which is simply the inverse of the logit.
 
 ```{r}
-head(general_glm$fitted.values)
+head(voc_glm$fitted.values)
 ```
 ```{r}
-head(predict(general_glm, newdata = students, type = "response")) # probs
-head(predict(general_glm, newdata = students)) # logit
+head(predict(voc_glm, newdata = students, type = "response")) # probs
+head(predict(voc_glm, newdata = students)) # logit
 ```
 > Exercise: compute the inverse of the logit (manually) and verify that
 it equals the response found with `predict` (solution is in the Rmarkdown
 file).
 
 ```{r, echo=FALSE, eval=FALSE}
-eta <- predict(general_glm, newdata = students)
+eta <- predict(voc_glm, newdata = students)
 head(exp(eta) / (1 + exp(eta))) # inverse of log-odds (for binomial)
 ```
 
@@ -288,8 +288,8 @@ the results to obtain predictions for both three programs together.
 
 The logits are so defined for the two models:
 $$
-X_{vg}\beta_{vg} = \log(\frac{\pi_{v}}{\pi_g})\,,\\
-X_{ag}\beta_{ag} = \log(\frac{\pi_{a}}{\pi_g})\,,
+X_{vg}\beta_{vg} = \log\left(\frac{\pi_{v}}{\pi_g}\right)\,,\\
+X_{ag}\beta_{ag} = \log\left(\frac{\pi_{a}}{\pi_g}\right)\,,
 $$
 
 and knowing that $\pi_v + \pi_g + \pi_a = 1$
