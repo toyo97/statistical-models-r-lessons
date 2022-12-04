@@ -201,9 +201,9 @@ can be noticed:
   instead of an exact t-test;
 - R-squared cannot be computed (there are no residuals) and the
   _deviance_ is printed instead:
-  - `Null deviance` represents the distance of this fit with the model
-    which only has the intercept
-  - `Residual deviance` compares the fit with a perfect model (with number
+  - `Null deviance` represents the distance of the null model
+    (which has only the intercept) from a "perfect" saturated model
+  - `Residual deviance` compares the fit with the saturated model (with number
     of parameters equal to the number of observations)
 
 We can do the same thing with the pair `academic/general`.
